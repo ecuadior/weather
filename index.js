@@ -9,8 +9,14 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 import { routeHello, routeAPINames, routeWeather } from "./routes.js";
 import express from "express";
+import path from "path";
 const server = express();
 const port = 3040;
+server.get('/components/weather', function (req, res) {
+    const filePath = path.join(process.cwd(), "public", "weather.html");
+    res.setHeader('Content-type', "text/html");
+    res.sendFile(filePath);
+});
 server.get("/hello", function (req, res) {
     const response = routeHello();
     res.send(response);
